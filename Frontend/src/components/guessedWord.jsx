@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from "react";
 
-export function LetterBoard({ onGuess }) {
+export function GuessedWord({ onGuess }) {
     const [input, setInput] = useState("");
 
     const handleSubmit = (e) => {
@@ -18,7 +18,7 @@ export function LetterBoard({ onGuess }) {
                 <input
                     type="text"
                     className="form-control"
-                    placeholder="Guess a word!"
+                    placeholder="Enter your guess"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                 />

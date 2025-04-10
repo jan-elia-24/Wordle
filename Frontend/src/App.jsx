@@ -1,13 +1,14 @@
-import { useState } from 'react'
 import './App.css'
 import { Header } from './components/header'
-import { LetterBoard } from './components/letterBoard'
+import { GameOptions } from './components/gameOptions';
+import { GuessedWord } from './components/guessedWord'
 
 function App() {
   return (
     <>
       <Header />
-      <LetterBoard />
+      <GameOptions />
+      <GuessedWord />
     </>
   );
 }
