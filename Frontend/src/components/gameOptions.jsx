@@ -5,16 +5,8 @@ export function GameOptions({ onOptionsChange }) {
   const [wordLength, setWordLength] = useState(2);
   const [allowRepeats, setAllowRepeats] = useState(false);
 
-  const handleWordLengthChange = (e) => {
-    const value = parseInt(e.target.value);
-    setWordLength(value);
-    onOptionsChange?.({ wordLength: value, allowRepeats });
-  };
-
-  const handleAllowRepeatsChange = (e) => {
-    const value = e.target.value === 'true';
-    setAllowRepeats(value);
-    onOptionsChange?.({ wordLength, allowRepeats: value });
+  const handleConfirm = () => {
+    onOptionsChange?.({ wordLength, allowRepeats });
   };
 
   return (
@@ -24,16 +16,11 @@ export function GameOptions({ onOptionsChange }) {
         <select
           className="form-select"
           value={wordLength}
-          onChange={handleWordLengthChange}
+          onChange={(e) => setWordLength(parseInt(e.target.value))}
         >
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-          <option value={6}>6</option>
-          <option value={7}>7</option>
-          <option value={8}>8</option>
-          <option value={9}>9</option>
+          {[2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+            <option key={num} value={num}>{num}</option>
+          ))}
         </select>
       </div>
 
@@ -42,11 +29,17 @@ export function GameOptions({ onOptionsChange }) {
         <select
           className="form-select"
           value={allowRepeats}
-          onChange={handleAllowRepeatsChange}
+          onChange={(e) => setAllowRepeats(e.target.value === 'true')}
         >
           <option value="false">No</option>
           <option value="true">Yes</option>
         </select>
+      </div>
+
+      <div className="text-end">
+        <button className="btn btn-success" onClick={handleConfirm}>
+          OK
+        </button>
       </div>
     </div>
   );
