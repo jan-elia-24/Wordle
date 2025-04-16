@@ -18,18 +18,14 @@ const words = fs.readFileSync(path.join(__dirname, 'data', 'words.txt'), 'utf-8'
   .map(w => w.trim().toLowerCase())
   .filter(w => w.length > 0);
 
-// API-endpoint
+// API endpoints
 app.get('/api/random-word', (req, res) => {
   const wordLength = parseInt(req.query.wordLength);
   const allowRepeats = req.query.allowRepeats === 'true';
 
   let candidates = words.filter(word => word.length === wordLength);
-
   if (!allowRepeats) {
-    candidates = candidates.filter(word => {
-      const letters = new Set(word.split(''));
-      return letters.size === word.length;
-    });
+    candidates = candidates.filter(word => new Set(word).size === word.length);
   }
 
   if (candidates.length === 0) {
@@ -40,6 +36,15 @@ app.get('/api/random-word', (req, res) => {
   res.json({ word: randomWord });
 });
 
+// Serva frontend från byggmappen
+app.use(express.static(path.resolve(__dirname, '../Frontend/dist')));
+
+// React fallback 
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../Frontend/dist/index.html'));
+});
+
+// Starta server
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`✅ Server running at http://localhost:${PORT}`);
 });
