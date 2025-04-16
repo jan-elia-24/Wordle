@@ -6,7 +6,7 @@ export function GuessedWord({ onGuess }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (input.length > 0) {
+    if (input.length > 2) {
       if (onGuess) onGuess(input);
       setInput("");
     }

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import { Header } from './components/header';
 import { GameOptions } from './components/gameOptions';
-import { GuessedWord } from './components/guessedWord';
+import { GameScreen } from './components/gameScreen';
 
 function App() {
   const [optionsConfirmed, setOptionsConfirmed] = useState(false);
@@ -13,11 +13,6 @@ function App() {
     setOptionsConfirmed(true);
   };
 
-  const handleGuess = (guess) => {
-    console.log("User guessed:", guess);
-    // logik för att kontrollera orden
-  };
-
   return (
     <>
       <Header />
@@ -25,7 +20,7 @@ function App() {
         <GameOptions onOptionsChange={handleOptionsChange} />
       )}
       {optionsConfirmed && (
-        <GuessedWord onGuess={handleGuess} />
+        <GameScreen gameOptions={gameOptions} />
       )}
     </>
   );
