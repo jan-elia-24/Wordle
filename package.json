@@ -3,9 +3,14 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "dev": "concurrently \"npm run dev --prefix Frontend\" \"npm start --prefix Backend\""
+    "install-all": "npm-run-all --parallel install-frontend install-backend",
+    "install-frontend": "npm install --prefix Frontend",
+    "install-backend": "npm install --prefix Backend",
+    "start": "concurrently \"npm run dev --prefix Frontend\" \"npm start --prefix Backend\"",
+    "test": "npm test --prefix Backend"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "npm-run-all": "^4.1.5"
   }
 }
