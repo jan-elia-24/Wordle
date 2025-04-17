@@ -4,7 +4,7 @@ import { GameStats } from './gameStats';
 import { getRandomWord } from '../services/wordApi';
 import { isCorrectGuess, letterFeedback } from '../utils/gameLogic';
 
-export function GameScreen({ gameOptions }) {
+export function GameScreen({ gameOptions, onRestart }) {
   const [targetWord, setTargetWord] = useState('');
   const [guesses, setGuesses] = useState([]);
   const [feedback, setFeedback] = useState([]);
@@ -13,7 +13,6 @@ export function GameScreen({ gameOptions }) {
   const [startTime, setStartTime] = useState(null);
   const [elapsedTime, setElapsedTime] = useState(0);
 
-  // Fetch random word and start timer
   useEffect(() => {
     async function fetchWord() {
       setIsLoading(true);
@@ -34,7 +33,6 @@ export function GameScreen({ gameOptions }) {
     fetchWord();
   }, [gameOptions]);
 
-  // Timer interval
   useEffect(() => {
     if (!startTime) return;
     const interval = setInterval(() => {
@@ -96,6 +94,7 @@ export function GameScreen({ gameOptions }) {
           onGuess={handleGuess}
           wordLength={gameOptions.wordLength}
           allowRepeats={gameOptions.allowRepeats}
+          onRestart={onRestart}
         />
 
         <div className="mt-4">

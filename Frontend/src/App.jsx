@@ -17,6 +17,10 @@ function App() {
     setOptionsConfirmed(true);
   };
 
+  const handleRestart = () => {
+    setOptionsConfirmed(false); // Tillbaka till start
+  };
+
   return (
     <Router>
       <Header />
@@ -26,7 +30,7 @@ function App() {
           element={
             !optionsConfirmed
               ? <GameOptions onOptionsChange={handleOptionsChange} />
-              : <GameScreen gameOptions={gameOptions} />
+              : <GameScreen gameOptions={gameOptions} onRestart={handleRestart} />
           }
         />
         <Route path="/highscores" element={<Highscores />} />

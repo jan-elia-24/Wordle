@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from "react";
 
-export function GuessedWord({ onGuess, wordLength, allowRepeats }) {
+export function GuessedWord({ onGuess, wordLength, allowRepeats, onRestart }) {
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
 
@@ -49,6 +49,13 @@ export function GuessedWord({ onGuess, wordLength, allowRepeats }) {
           disabled={input.length !== wordLength}
         >
           Guess
+        </button>
+        <button
+          type="button"
+          className="btn btn-outline-danger"
+          onClick={onRestart}
+        >
+          Restart Game
         </button>
       </form>
       {error && <div className="text-danger mt-2">{error}</div>}
