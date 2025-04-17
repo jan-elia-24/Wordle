@@ -1,0 +1,11 @@
+{
+  "name": "wordle-fullstack",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix Frontend\" \"npm start --prefix Backend\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
