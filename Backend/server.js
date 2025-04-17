@@ -2,40 +2,44 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
-import { fileURLToPath } from 'url';
 import mongoose from 'mongoose';
-
+import { fileURLToPath } from 'url';
+import { getAllHighscores, saveHighscore, Highscore } from './highscoreService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-mongoose.connect('mongodb://127.0.0.1:27017/wordgame', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => console.log('✅ MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
-
-const Highscore = mongoose.model('Highscore', {
-  name: String,
-  attempts: Number,
-  time: Number,
-  date: { type: Date, default: Date.now }
-});
-
-
 const app = express();
 const PORT = 5080;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
+// MongoDB connection
+mongoose.connect('mongodb://localhost:27017/wordgame', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log('✅ MongoDB connected');
+}).catch(err => {
+  console.error('❌ MongoDB connection error:', err);
+});
+
+// Load words
 const words = fs.readFileSync(path.join(__dirname, 'data', 'words.txt'), 'utf-8')
   .split('\n')
   .map(w => w.trim().toLowerCase())
   .filter(w => w.length > 0);
 
-// API endpoints
+// Serve static files
+app.use(express.static(path.resolve(__dirname, '../Frontend/dist')));
 
+// EJS (optional for server-side highscore page)
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// API: get random word
 app.get('/api/random-word', (req, res) => {
   const wordLength = parseInt(req.query.wordLength);
   const allowRepeats = req.query.allowRepeats === 'true';
@@ -53,12 +57,18 @@ app.get('/api/random-word', (req, res) => {
   res.json({ word: randomWord });
 });
 
-app.use(express.static(path.resolve(__dirname, '../Frontend/dist')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../Frontend/dist/index.html'));
+// API: get highscores
+app.get('/api/highscores', async (req, res) => {
+  try {
+    const scores = await getAllHighscores();
+    res.json(scores);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch highscores' });
+  }
 });
 
+// API: save highscore
 app.post('/api/highscores', async (req, res) => {
   const { name, attempts, time } = req.body;
 
@@ -67,12 +77,27 @@ app.post('/api/highscores', async (req, res) => {
     await newScore.save();
     res.status(201).json({ message: 'Highscore saved!' });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Failed to save highscore' });
   }
 });
 
+// SSR: EJS route for /highscores
+app.get('/highscores', async (req, res) => {
+  try {
+    const highscores = await getAllHighscores();
+    res.render('highscores', { highscores });
+  } catch (err) {
+    res.status(500).send('Failed to render highscore page');
+  }
+});
 
-// Starta server
+// Fallback to frontend
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../Frontend/dist/index.html'));
+});
+
+// Start server
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
 });

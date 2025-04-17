@@ -3,6 +3,7 @@ import { GuessedWord } from './guessedWord';
 import { GameStats } from './gameStats';
 import { getRandomWord } from '../services/wordApi';
 import { isCorrectGuess, letterFeedback } from '../utils/gameLogic';
+import { saveHighscore } from '../services/highscoreClient';
 
 export function GameScreen({ gameOptions, onRestart }) {
   const [targetWord, setTargetWord] = useState('');
@@ -65,7 +66,17 @@ export function GameScreen({ gameOptions, onRestart }) {
 
     if (isCorrectGuess(formattedGuess, targetWord)) {
       const totalTime = Math.floor((Date.now() - startTime) / 1000);
-      alert(`🎉 You guessed it right!\nAttempts: ${attempts + 1}\nTime: ${totalTime} seconds`);
+      const name = prompt("🎉 You guessed it right!\nEnter your name for the highscore:");
+
+      if (name) {
+        saveHighscore(name, attempts + 1, totalTime)
+          .then(() => {
+            alert(`🎉 Your score has been saved!\nAttempts: ${attempts + 1}\nTime: ${totalTime} seconds`);
+          })
+          .catch(() => {
+            alert("Could not save your score. Please try again.");
+          });
+      }
     } else {
       const fb = letterFeedback(formattedGuess, targetWord);
       setFeedback((prev) => [...prev, fb]);
