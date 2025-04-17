@@ -35,7 +35,7 @@ const words = fs.readFileSync(path.join(__dirname, 'data', 'words.txt'), 'utf-8'
 // Serve static files
 app.use(express.static(path.resolve(__dirname, '../Frontend/dist')));
 
-// EJS (optional for server-side highscore page)
+// EJS 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -99,5 +99,5 @@ app.get('*', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
