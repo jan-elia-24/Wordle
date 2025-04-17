@@ -4,6 +4,7 @@ import { GameStats } from './gameStats';
 import { getRandomWord } from '../services/wordApi';
 import { isCorrectGuess, letterFeedback } from '../utils/gameLogic';
 import { saveHighscore } from '../services/highscoreClient';
+import { ColorInstructions } from './ColorInstructions';
 
 export function GameScreen({ gameOptions, onRestart }) {
   const [targetWord, setTargetWord] = useState('');
@@ -92,13 +93,20 @@ export function GameScreen({ gameOptions, onRestart }) {
   }
 
   return (
-    <>
+    <div className="container mt-4">
       <GameStats attempts={attempts} elapsedTime={elapsedTime} />
+      <ColorInstructions />
 
-      <div className="container mt-4">
-        <div className="mb-4">
-          <p className="h5"><strong>Guess a word with {targetWord.length} letters</strong></p>
-          <p><strong>Repeated letters: {gameOptions.allowRepeats ? '✔️ Allowed' : '❌ Not allowed'}</strong></p>
+      <div className="mx-auto" style={{ maxWidth: '600px' }}>
+        <div className="mb-4 text-center">
+          <p className="h5">
+            <strong>Guess a word with {targetWord.length} letters</strong>
+          </p>
+          <p>
+            <strong>
+              Repeated letters: {gameOptions.allowRepeats ? '✔️ Allowed' : '❌ Not allowed'}
+            </strong>
+          </p>
         </div>
 
         <GuessedWord
@@ -111,36 +119,36 @@ export function GameScreen({ gameOptions, onRestart }) {
         <div className="mt-4">
           {guesses.map((guess, i) => (
             <div key={i} className="mb-3">
-              <div className="d-flex align-items-center gap-1">
-                <span className="me-2" style={{ fontSize: '1.2rem', minWidth: '50px' }}>
+              <div className="d-flex align-items-center gap-1 justify-content-center">
+                <span style={{ fontSize: '1.2rem', minWidth: '50px' }}>
                   #{i + 1}
                 </span>
                 <div className="d-flex gap-2">
-                  {feedback[i] && feedback[i].map((f, j) => (
-                    <div
-                      key={j}
-                      className={`d-flex justify-content-center align-items-center 
-                        ${f === 'correct' ? 'bg-success' :
-                          f === 'present' ? 'bg-warning' : 'bg-danger'}
-                        text-white`}
-                      style={{
-                        width: '50px',
-                        height: '50px',
-                        fontSize: '1.8rem',
-                        fontWeight: 'bold',
-                        borderRadius: '8px',
-                        boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                      }}
-                    >
-                      {guess[j].toUpperCase()}
-                    </div>
-                  ))}
+                  {feedback[i] &&
+                    feedback[i].map((f, j) => (
+                      <div
+                        key={j}
+                        className={`d-flex justify-content-center align-items-center 
+                          ${f === 'correct' ? 'bg-success' : f === 'present' ? 'bg-warning' : 'bg-danger'}
+                          text-white`}
+                        style={{
+                          width: '50px',
+                          height: '50px',
+                          fontSize: '1.8rem',
+                          fontWeight: 'bold',
+                          borderRadius: '8px',
+                          boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                        }}
+                      >
+                        {guess[j].toUpperCase()}
+                      </div>
+                    ))}
                 </div>
               </div>
             </div>
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
