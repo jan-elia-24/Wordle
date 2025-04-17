@@ -45,7 +45,7 @@ export function GameScreen({ gameOptions }) {
     setGuesses((prev) => [...prev, formattedGuess]);
 
     if (isCorrectGuess(formattedGuess, targetWord)) {
-      alert('🎉 Du gissade rätt!');
+      alert('🎉 You guessed it right!');
     } else {
       const fb = letterFeedback(formattedGuess, targetWord);
       setFeedback((prev) => [...prev, fb]);
@@ -63,16 +63,17 @@ export function GameScreen({ gameOptions }) {
   return (
     <div className="container mt-4">
       <div className="mb-4">
-        <p className="h5"><strong>Gissa ett ord på {targetWord.length} bokstäver</strong></p>
-        <p><strong>Upprepade bokstäver: {gameOptions.allowRepeats ? '✔️ Tillåtet' : '❌ Inte tillåtet'}</strong></p>
+        <p className="h5"><strong>Guess a word with {targetWord.length} letters</strong></p>
+        <p><strong>Repeated letters: {gameOptions.allowRepeats ? '✔️ Allowed' : '❌ Not allowed'}</strong></p>
       </div>
-  
-      <GuessedWord 
-        onGuess={handleGuess} 
+
+
+      <GuessedWord
+        onGuess={handleGuess}
         wordLength={gameOptions.wordLength}
         allowRepeats={gameOptions.allowRepeats}
       />
-  
+
       <div className="mt-4">
         {guesses.map((guess, i) => (
           <div key={i} className="mb-3">
@@ -82,10 +83,10 @@ export function GameScreen({ gameOptions }) {
               </span>
               <div className="d-flex gap-2">
                 {feedback[i] && feedback[i].map((f, j) => (
-                  <div 
+                  <div
                     key={j}
                     className={`d-flex justify-content-center align-items-center 
-                      ${f === 'correct' ? 'bg-success' : 
+                      ${f === 'correct' ? 'bg-success' :
                         f === 'present' ? 'bg-warning' : 'bg-secondary'}
                       text-white`}
                     style={{

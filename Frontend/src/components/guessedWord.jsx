@@ -39,12 +39,12 @@ export function GuessedWord({ onGuess, wordLength, allowRepeats }) {
           value={input}
           onChange={handleInputChange}
           pattern={`[a-zA-Z]{${wordLength}}`}
-          title={`Please enter exactly ${wordLength} letters`}
+          title={`Please use only letters A–Z. No Swedish characters (Å, Ä, Ö) or symbols allowed.`}
           autoComplete="off"
           autoFocus
         />
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="btn btn-primary"
           disabled={input.length !== wordLength}
         >

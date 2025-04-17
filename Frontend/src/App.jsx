@@ -6,6 +6,7 @@ import { GameOptions } from './components/gameOptions';
 import { GameScreen } from './components/gameScreen';
 import { About } from './components/about';
 import { Highscores } from './components/highScore';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function App() {
   const [optionsConfirmed, setOptionsConfirmed] = useState(false);
