@@ -110,7 +110,7 @@ export function GameScreen({ gameOptions, onRestart }) {
                       key={j}
                       className={`d-flex justify-content-center align-items-center 
                         ${f === 'correct' ? 'bg-success' :
-                          f === 'present' ? 'bg-warning' : 'bg-secondary'}
+                          f === 'present' ? 'bg-warning' : 'bg-danger'}
                         text-white`}
                       style={{
                         width: '50px',
