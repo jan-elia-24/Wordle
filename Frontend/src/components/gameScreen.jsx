@@ -66,30 +66,42 @@ export function GameScreen({ gameOptions }) {
         <p className="h5"><strong>Gissa ett ord på {targetWord.length} bokstäver</strong></p>
         <p><strong>Upprepade bokstäver: {gameOptions.allowRepeats ? '✔️ Tillåtet' : '❌ Inte tillåtet'}</strong></p>
       </div>
-
+  
       <GuessedWord 
         onGuess={handleGuess} 
         wordLength={gameOptions.wordLength}
         allowRepeats={gameOptions.allowRepeats}
       />
-
+  
       <div className="mt-4">
         {guesses.map((guess, i) => (
-          <div key={i} className="mb-2">
-            <span>{guess} ➝ </span>
-            {feedback[i] && feedback[i].map((f, j) => (
-              <span 
-                key={j} 
-                className={`letter-feedback ${f}`}
-                style={{ 
-                  color: f === 'correct' ? 'green' : f === 'present' ? 'orange' : 'gray',
-                  fontWeight: 'bold',
-                  fontSize: '1.2rem'
-                }}
-              >
-                {guess[j]}
+          <div key={i} className="mb-3">
+            <div className="d-flex align-items-center gap-1">
+              <span className="me-2" style={{ fontSize: '1.2rem', minWidth: '50px' }}>
+                #{i + 1}
               </span>
-            ))}
+              <div className="d-flex gap-2">
+                {feedback[i] && feedback[i].map((f, j) => (
+                  <div 
+                    key={j}
+                    className={`d-flex justify-content-center align-items-center 
+                      ${f === 'correct' ? 'bg-success' : 
+                        f === 'present' ? 'bg-warning' : 'bg-secondary'}
+                      text-white`}
+                    style={{
+                      width: '50px',
+                      height: '50px',
+                      fontSize: '1.8rem',
+                      fontWeight: 'bold',
+                      borderRadius: '8px',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+                    }}
+                  >
+                    {guess[j].toUpperCase()}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         ))}
       </div>

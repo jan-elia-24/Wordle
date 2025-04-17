@@ -1,8 +1,11 @@
 import { useState } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from './components/header';
 import { GameOptions } from './components/gameOptions';
 import { GameScreen } from './components/gameScreen';
+import { About } from './components/about';
+import { Highscores } from './components/highScore';
 
 function App() {
   const [optionsConfirmed, setOptionsConfirmed] = useState(false);
@@ -14,15 +17,21 @@ function App() {
   };
 
   return (
-    <>
+    <Router>
       <Header />
-      {!optionsConfirmed && (
-        <GameOptions onOptionsChange={handleOptionsChange} />
-      )}
-      {optionsConfirmed && (
-        <GameScreen gameOptions={gameOptions} />
-      )}
-    </>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            !optionsConfirmed
+              ? <GameOptions onOptionsChange={handleOptionsChange} />
+              : <GameScreen gameOptions={gameOptions} />
+          }
+        />
+        <Route path="/highscores" element={<Highscores />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </Router>
   );
 }
 
