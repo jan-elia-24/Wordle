@@ -5,7 +5,6 @@ import { Header } from './components/header';
 import { GameOptions } from './components/gameOptions';
 import { GameScreen } from './components/gameScreen';
 import { About } from './components/about';
-import { Highscores } from './components/highScore';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
   };
 
   const handleRestart = () => {
-    setOptionsConfirmed(false); // Tillbaka till start
+    setOptionsConfirmed(false); 
   };
 
   return (
@@ -33,7 +32,6 @@ function App() {
               : <GameScreen gameOptions={gameOptions} onRestart={handleRestart} />
           }
         />
-        <Route path="/highscores" element={<Highscores />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </Router>
