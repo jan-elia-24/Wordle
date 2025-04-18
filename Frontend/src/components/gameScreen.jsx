@@ -70,7 +70,7 @@ export function GameScreen({ gameOptions, onRestart }) {
       const name = prompt("🎉 You guessed it right!\nEnter your name for the highscore:");
 
       if (name) {
-        saveHighscore(name, attempts + 1, totalTime)
+        saveHighscore(name, attempts + 1, totalTime, gameOptions.wordLength, gameOptions.allowRepeats)
           .then(() => {
             alert(`🎉 Your score has been saved!\nAttempts: ${attempts + 1}\nTime: ${totalTime} seconds`);
           })

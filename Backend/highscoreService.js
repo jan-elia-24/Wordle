@@ -4,6 +4,8 @@ const highscoreSchema = new mongoose.Schema({
   name: String,
   attempts: Number,
   time: Number,
+  wordLength: Number,        
+  allowRepeats: Boolean,     
   date: {
     type: Date,
     default: Date.now
@@ -12,8 +14,8 @@ const highscoreSchema = new mongoose.Schema({
 
 const Highscore = mongoose.model('Highscore', highscoreSchema);
 
-export async function saveHighscore(name, attempts, time) {
-  const newScore = new Highscore({ name, attempts, time });
+export async function saveHighscore(name, attempts, time, wordLength, allowRepeats) {
+  const newScore = new Highscore({ name, attempts, time, wordLength, allowRepeats });
   return await newScore.save();
 }
 

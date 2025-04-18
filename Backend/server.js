@@ -72,10 +72,10 @@ app.get('/api/highscores', async (req, res) => {
 
 // API: save highscore
 app.post('/api/highscores', async (req, res) => {
-  const { name, attempts, time } = req.body;
+  const { name, attempts, time, wordLength, allowRepeats } = req.body;
 
   try {
-    const newScore = new Highscore({ name, attempts, time });
+    const newScore = new Highscore({ name, attempts, time, wordLength, allowRepeats });
     await newScore.save();
     res.status(201).json({ message: 'Highscore saved!' });
   } catch (err) {

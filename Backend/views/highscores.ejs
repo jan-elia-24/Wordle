@@ -18,6 +18,8 @@
             <th>Name</th>
             <th>Attempts</th>
             <th>Time (s)</th>
+            <th>Word Length</th>
+            <th>Allow Repeats</th>
             <th>Date</th>
           </tr>
         </thead>
@@ -28,12 +30,13 @@
                 <% if (index === 0) { %> 🥇 
                 <% } else if (index === 1) { %> 🥈 
                 <% } else if (index === 2) { %> 🥉 
-                <% } else { %> <%= index + 1 %> 
-                <% } %>
+                <% } else { %> <%= index + 1 %> <% } %>
               </td>
               <td><strong><%= score.name %></strong></td>
               <td><%= score.attempts %></td>
               <td><%= score.time %></td>
+              <td><%= score.wordLength %></td>
+              <td><%= score.allowRepeats ? 'Yes' : 'No' %></td>
               <td><%= score.date.toISOString().slice(0, 19).replace('T', ' ') %></td>
             </tr>
           <% }) %>
