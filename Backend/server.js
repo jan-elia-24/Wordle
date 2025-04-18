@@ -2,6 +2,7 @@ import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
+import compression from 'compression';
 import mongoose from 'mongoose';
 import { fileURLToPath } from 'url';
 import { getAllHighscores, saveHighscore, Highscore } from './highscoreService.js';
@@ -14,6 +15,7 @@ const PORT = 5080;
 
 // Middleware
 app.use(cors());
+app.use(compression());
 app.use(express.json());
 
 // MongoDB connection
