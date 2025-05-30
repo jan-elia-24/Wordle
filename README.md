@@ -53,7 +53,7 @@ npm test
 
 ## Deployment
 
-Spelet är deployat och tillgängligt online på:
+The game is deployed and available online at:
 
 [https://wordle-wj04.onrender.com/](https://wordle-wj04.onrender.com/)
 
