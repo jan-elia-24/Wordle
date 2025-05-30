@@ -51,6 +51,12 @@ npm test
 - `/about` – About page
 - `/highscores` – Highscore list (SSR with EJS)
 
+## Deployment
+
+Spelet är deployat och tillgängligt online på:
+
+[https://wordle-wj04.onrender.com/](https://wordle-wj04.onrender.com/)
+
 ## Author
 
 Jan Elia  
