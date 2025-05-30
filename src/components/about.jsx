@@ -37,7 +37,7 @@ export function About() {
             <p>
               Hi! My name is <strong>Jan Elia</strong>, a programming student passionate about
               building modern, responsive, and user-friendly web applications. This project is part of
-              my fullstack development course where I focus on technologies like <strong>React</strong> and <strong>Node.js</strong>.
+              my fullstack development course where I focus on technologies like <strong>React</strong>, <strong>Next.js</strong> and <strong>Node.js</strong>.
             </p>
 
             <hr className="my-4" />

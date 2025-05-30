@@ -19,14 +19,12 @@ app.use(compression());
 app.use(express.json());
 
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/wordgame', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('✅ MongoDB connected');
-}).catch(err => {
-  console.error('❌ MongoDB connection error:', err);
-});
+mongoose.connect('mongodb://localhost:27017/wordgame')
+  .then(() => {
+    console.log('✅ MongoDB connected');
+  }).catch(err => {
+    console.error('❌ MongoDB connection error:', err);
+  });
 
 // Load words
 const words = fs.readFileSync(path.join(__dirname, 'data', 'words.txt'), 'utf-8')
@@ -34,10 +32,10 @@ const words = fs.readFileSync(path.join(__dirname, 'data', 'words.txt'), 'utf-8'
   .map(w => w.trim().toLowerCase())
   .filter(w => w.length > 0);
 
-// Serve static files
-app.use(express.static(path.resolve(__dirname, '../Frontend/dist')));
+// Serve static frontend build from root/dist
+app.use(express.static(path.resolve(__dirname, '../dist')));
 
-// EJS 
+// EJS
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -84,7 +82,7 @@ app.post('/api/highscores', async (req, res) => {
   }
 });
 
-// SSR: EJS route for /highscores
+// SSR: highscore EJS route
 app.get('/highscores', async (req, res) => {
   try {
     const highscores = await getAllHighscores();
@@ -94,15 +92,16 @@ app.get('/highscores', async (req, res) => {
   }
 });
 
-// Fallback to frontend
+// Fallback to frontend SPA (from root /dist)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Frontend/dist/index.html'));
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 // Start server
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
   });
 }
+
 export { app };
