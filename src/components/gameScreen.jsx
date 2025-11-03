@@ -70,11 +70,20 @@ export function GameScreen({ gameOptions, onRestart }) {
       const name = prompt("🎉 You guessed it right!\nEnter your name for the highscore:");
 
       if (name) {
+        console.log('📊 Saving highscore:', { 
+          name, 
+          attempts: attempts + 1, 
+          time: totalTime, 
+          wordLength: gameOptions.wordLength, 
+          allowRepeats: gameOptions.allowRepeats 
+        });
+        
         saveHighscore(name, attempts + 1, totalTime, gameOptions.wordLength, gameOptions.allowRepeats)
           .then(() => {
             alert(`🎉 Your score has been saved!\nAttempts: ${attempts + 1}\nTime: ${totalTime} seconds`);
           })
-          .catch(() => {
+          .catch((err) => {
+            console.error('Save error:', err);
             alert("Could not save your score. Please try again.");
           });
       }

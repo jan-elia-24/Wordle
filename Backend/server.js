@@ -3,9 +3,8 @@ import fs from 'fs';
 import path from 'path';
 import cors from 'cors';
 import compression from 'compression';
-import mongoose from 'mongoose';
 import { fileURLToPath } from 'url';
-import { getAllHighscores, saveHighscore, Highscore } from './highscoreService.js';
+import { getAllHighscores, saveHighscore } from './highscoreService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,14 +16,6 @@ const PORT = 5080;
 app.use(cors());
 app.use(compression());
 app.use(express.json());
-
-// MongoDB connection
-mongoose.connect('mongodb://localhost:27017/wordgame')
-  .then(() => {
-    console.log('✅ MongoDB connected');
-  }).catch(err => {
-    console.error('❌ MongoDB connection error:', err);
-  });
 
 // Load words
 const words = fs.readFileSync(path.join(__dirname, 'data', 'words.txt'), 'utf-8')
@@ -73,8 +64,7 @@ app.post('/api/highscores', async (req, res) => {
   const { name, attempts, time, wordLength, allowRepeats } = req.body;
 
   try {
-    const newScore = new Highscore({ name, attempts, time, wordLength, allowRepeats });
-    await newScore.save();
+    await saveHighscore(name, attempts, time, wordLength, allowRepeats);
     res.status(201).json({ message: 'Highscore saved!' });
   } catch (err) {
     console.error(err);
