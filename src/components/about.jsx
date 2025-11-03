@@ -15,7 +15,7 @@ export function About() {
             </p>
             <ul className="text-start fs-5">
               <li>🎮 <strong>Game Page</strong>: Built with <strong>React</strong>, where users can play the game by guessing randomly generated words.</li>
-              <li>🏆 <strong>Highscore Page</strong>: Server-side rendered with <strong>EJS</strong>, fetching scores from a MongoDB database.</li>
+              <li>🏆 <strong>Highscore Page</strong>: Server-side rendered with <strong>EJS</strong>, fetching scores from a PostgreSQL database.</li>
               <li>ℹ️ <strong>About Page</strong>: A static informational page about the developer and the project.</li>
             </ul>
             <p className="lead">
@@ -76,6 +76,17 @@ export function About() {
                     rel="noopener noreferrer"
                   >
                     github.com/jan-elia-24
+                  </a>
+                </li>
+                <li className="d-flex align-items-center">
+                  <i className="bi bi-globe2 text-success me-2"></i>
+                  <a
+                    href="https://portfolio1-lemon-tau.vercel.app"
+                    className="text-decoration-none text-dark"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    portfolio1-lemon-tau.vercel.app
                   </a>
                 </li>
               </ul>

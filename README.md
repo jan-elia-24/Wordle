@@ -1,6 +1,6 @@
 # Wordle Fullstack Game
 
-A fullstack Wordle-inspired web game built with React, Express, Bootstrap, and MongoDB.
+A fullstack Wordle-inspired web game built with React, Express, Bootstrap, and PostgreSQL.
 
 ## Features
 
@@ -16,7 +16,7 @@ A fullstack Wordle-inspired web game built with React, Express, Bootstrap, and M
 
 - **Frontend**: React 19, Vite, Bootstrap 5
 - **Backend**: Node.js, Express, EJS
-- **Database**: MongoDB
+- **Database**: PostgreSQL
 - **Testing**: Jest, Supertest
 
 ## Installation
@@ -63,3 +63,4 @@ Jan Elia
 📧 jan.elia995@hotmail.com  
 🔗 [LinkedIn](https://www.linkedin.com/in/jan-elia-8001a7231/)  
 🐙 [GitHub](https://github.com/jan-elia-24)
+🌐 [Portfolio](https://portfolio1-lemon-tau.vercel.app/)
