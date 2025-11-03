@@ -39,7 +39,6 @@ export async function saveHighscore(name, attempts, time, wordLength, allowRepea
 
   try {
     const result = await pool.query(query, values);
-    console.log('✅ Saved highscore:', { name, attempts, time, wordLength, allowRepeats }); // DEBUG
     return result.rows[0];
   } catch (err) {
     console.error('Error saving highscore:', err);
