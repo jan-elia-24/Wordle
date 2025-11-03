@@ -67,7 +67,7 @@ export function About() {
                     linkedin.com/in/jan-elia-8001a7231
                   </a>
                 </li>
-                <li className="d-flex align-items-center">
+                <li className="mb-3 d-flex align-items-center">
                   <i className="bi bi-github text-dark me-2"></i>
                   <a
                     href="https://github.com/jan-elia-24"
