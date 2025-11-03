@@ -59,12 +59,12 @@ export function About() {
                 <li className="mb-3 d-flex align-items-center">
                   <i className="bi bi-linkedin text-primary me-2"></i>
                   <a
-                    href="https://www.linkedin.com/in/jan-elia-8001a7231/"
+                    href="https://www.linkedin.com/in/jan-elia"
                     className="text-decoration-none text-dark"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    linkedin.com/in/jan-elia-8001a7231
+                    LinkedIn
                   </a>
                 </li>
                 <li className="mb-3 d-flex align-items-center">
@@ -75,7 +75,7 @@ export function About() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    github.com/jan-elia-24
+                    Github
                   </a>
                 </li>
                 <li className="d-flex align-items-center">
@@ -86,7 +86,7 @@ export function About() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    portfolio1-lemon-tau.vercel.app
+                    Jans / Portfolio
                   </a>
                 </li>
               </ul>
