@@ -1,10 +1,12 @@
-export async function getRandomWord({ wordLength, allowRepeats }) {
-  const res = await fetch(`/api/random-word?wordLength=${wordLength}&allowRepeats=${allowRepeats}`);
+const API_BASE = window.location.origin;
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch word");
+export async function getRandomWord(gameOptions) {
+  const response = await fetch(
+    `${API_BASE}/api/random-word?wordLength=${gameOptions.wordLength}&allowRepeats=${gameOptions.allowRepeats}`
+  );
+  if (!response.ok) {
+    throw new Error('Failed to fetch word');
   }
-
-  const data = await res.json();
+  const data = await response.json();
   return data.word;
 }
