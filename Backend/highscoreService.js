@@ -50,7 +50,15 @@ export async function saveHighscore(name, attempts, time, wordLength, allowRepea
 
 export async function getAllHighscores() {
   const query = `
-    SELECT * FROM highscores 
+    SELECT 
+      id,
+      name,
+      attempts,
+      time,
+      wordlength as "wordLength",        
+      allowrepeats as "allowRepeats",    
+      date
+    FROM highscores 
     ORDER BY time ASC, attempts ASC 
     LIMIT 10
   `;
